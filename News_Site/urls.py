@@ -17,13 +17,15 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path
 from News_Site.models import models
-from News_Site.views import NewsView
+from News_Site.views import NewsView, NewsPage, NewsAdd
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', lambda request: redirect('news/', permanent=True)),
+                  path('news/add', NewsAdd.as_view()),
+                  path('news/page/<int:news_id>', NewsPage.as_view()),
                   path('news/', NewsView.as_view()),
                   path('news/<int:page>', NewsView.as_view())
               ] + static(settings.STATIC_URL,
