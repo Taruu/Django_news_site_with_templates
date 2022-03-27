@@ -21,6 +21,7 @@ class NewsView(View):
         sort = request.GET.get('sort', 'new')
         list_news = News.objects.order_by(
             "-created_at" if sort == "new" else "created_at").all()[start:end]
-        response = render_to_string('News_Site/index.html')
+        response = render_to_string('News_Site/news.html',
+                                    {"list_news": list_news, "page": page})
 
         return HttpResponse(response)

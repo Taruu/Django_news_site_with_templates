@@ -18,10 +18,14 @@ from django.shortcuts import redirect
 from django.urls import path
 from News_Site.models import models
 from News_Site.views import NewsView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', lambda request: redirect('news/', permanent=True)),
-    path('news/', NewsView.as_view()),
-    path('news/<int:page>', NewsView.as_view())
-]
+                  path('admin/', admin.site.urls),
+                  path('', lambda request: redirect('news/', permanent=True)),
+                  path('news/', NewsView.as_view()),
+                  path('news/<int:page>', NewsView.as_view())
+              ] + static(settings.STATIC_URL,
+                         document_root=settings.STATIC_ROOT) + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

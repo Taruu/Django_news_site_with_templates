@@ -7,6 +7,14 @@
 <body>
 <h1>Hello world</h1>
 {{page}}
+{% for news in list_news %}
+<div>
+{{news.name}}
+    {{news.content}}
+    <img src="{{news.image.url}}" alt="альтернативный текст">
+</div>
+{% endfor %}
+
 
 </body>
 </html>
